@@ -1,0 +1,33 @@
+{
+  "ids": {
+    "User": 2,
+    "AccessToken": 3,
+    "ACL": 1,
+    "RoleMapping": 1,
+    "Role": 1,
+    "Category": 1,
+    "SubCategory": 1,
+    "Product": 1,
+    "Event": 1,
+    "Recipes": 1,
+    "Task": 1
+  },
+  "models": {
+    "User": {
+      "1": "{\"username\":\"paco\",\"password\":\"$2a$10$Jlz0uZewwOXJeDvHagbUWuVS18YOHsnG9.hqgYAe4b3X0dIzRPg7O\",\"email\":\"florencia@pescaderia.com\",\"id\":1}"
+    },
+    "AccessToken": {
+      "YEt0ZYx4nHZl5mo3KgJI6OaUc7ji02QfmCFy0LmMd8GUgRgzvvDWBPB5yeUH1LCJ": "{\"id\":\"YEt0ZYx4nHZl5mo3KgJI6OaUc7ji02QfmCFy0LmMd8GUgRgzvvDWBPB5yeUH1LCJ\",\"ttl\":1209600,\"created\":\"2016-12-26T20:00:26.476Z\",\"userId\":1}",
+      "2FdDsVL7V6DcTboc7ODJnJsO1ILaH2StSG61mt3dUwDPRfu7DAeBeVIhrPq8YSBu": "{\"id\":\"2FdDsVL7V6DcTboc7ODJnJsO1ILaH2StSG61mt3dUwDPRfu7DAeBeVIhrPq8YSBu\",\"ttl\":1209600,\"created\":\"2016-12-26T20:09:50.291Z\",\"userId\":1}"
+    },
+    "ACL": {},
+    "RoleMapping": {},
+    "Role": {},
+    "Category": {},
+    "SubCategory": {},
+    "Product": {},
+    "Event": {},
+    "Recipes": {},
+    "Task": {}
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "ids": {
+    "User": 1,
+    "AccessToken": 2,
+    "ACL": 1,
+    "RoleMapping": 1,
+    "Role": 1,
+    "Category": 2,
+    "SubCategory": 2,
+    "Product": 2,
+    "Event": 1,
+    "Recipes": 1,
+    "Task": 10,
+    "Usuario": 3,
+    "TaskUsuario": 1
+  },
+  "models": {
+    "User": {},
+    "AccessToken": {
+      "L2M2H1H4W3KdmOBoFwKonMB3nVkzHKyEJCjtgAlSaSIPOr6p2rWKmIJw2tX7yuAj": "{\"id\":\"L2M2H1H4W3KdmOBoFwKonMB3nVkzHKyEJCjtgAlSaSIPOr6p2rWKmIJw2tX7yuAj\",\"ttl\":1209600,\"created\":\"2016-12-26T22:22:04.975Z\",\"userId\":1}"
+    },
+    "ACL": {},
+    "RoleMapping": {},
+    "Role": {},
+    "Category": {
+      "1": "{\"name\":\"Mar\",\"id\":1}"
+    },
+    "SubCategory": {
+      "1": "{\"name\":\"Filete\",\"id\":1}"
+    },
+    "Product": {
+      "1": "{\"name\":\"tsasdas\",\"image\":\"images (1).jpg\",\"destacado\":true,\"codigo\":null,\"price\":null,\"description\":null,\"categoryId\":1,\"subCategoryId\":1,\"id\":1}"
+    },
+    "Event": {},
+    "Recipes": {},
+    "Task": {
+      "9": "{\"name\":\"Tarea 1\",\"description\":\"ASDASDASDASDAD\",\"priority\":\"1\",\"usuariosx\":[1,2],\"id\":9,\"fecha_inicio\":\"2016-12-26T00:00:00.000Z\",\"fecha_fin\":\"2016-12-29T00:00:00.000Z\"}"
+    },
+    "Usuario": {
+      "1": "{\"username\":\"admin\",\"password\":\"$2a$10$28jKNkdo1EgrPc8QZNBwX.6J0f3rcTd7UTEEo5af6R.FyXAlOUhGC\",\"email\":\"tato@tato.com\",\"id\":1}",
+      "2": "{\"username\":\"adminx\",\"password\":\"$2a$10$AiNU.Tl8fxvuWzHN1AcxauLrwfU82bHd2cNpDCLEuWB4o.jUcCIee\",\"email\":\"tatxo@tato.com\",\"id\":2}"
+    },
+    "TaskUsuario": {}
+  }
+}

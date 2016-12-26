@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>My First Admin</title>
+    <link rel="stylesheet" href="js/ng-admin.min.css">
+
+    <style>
+        #page-wrapper {
+            margin-top: -20px;
+        }
+
+        .nav {
+            margin-top: -45px;
+        }
+    </style>
+  </head>
+  <body ng-app="myApp">
+    <div ui-view="ng-admin"></div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js" type="text/javascript"></script>
+
+    <script src="js/ng-admin.min.js"></script>
+
+
+    <script type="text/javascript">
+        console.log(jQuery);
+
+        var API_URL = "http://localhost:3000/api/";
+
+        var myApp = angular.module('myApp', ['ng-admin']);
+
+        myApp.config(['NgAdminConfigurationProvider', 'RestangularProvider', '$httpProvider', function(NgAdminConfigurationProvider, RestangularProvider, $httpProvider) {
+            var nga = NgAdminConfigurationProvider;
+            // create an admin application
+            var admin = nga.application('Administrador Pescadería Rosario').baseApiUrl(API_URL);
+
+            var Product = nga.entity("products");
+            var User  = nga.entity("usuarios");
+            var Category = nga.entity('categories');
+            var SubCategory = nga.entity('subcategories');
+            var Event        = nga.entity('events');
+            var Recipe       = nga.entity('recipes');
+            var Task         = nga.entity('tasks');
+
+            var user_token = JSON.parse(localStorage.getItem('$p-token')).id;
+            RestangularProvider.setDefaultHeaders({ 'Authorization': user_token });
+            RestangularProvider.setFullResponse(true);
+            $httpProvider.defaults.useXDomain = true;
+            delete $httpProvider.defaults.headers.common['X-Requested-With'];
+
+            var superuser = JSON.parse(localStorage.getItem('$p-user')).admin;
+            
+            console.log(superuser);
+
+            Product.listView().title('Lista de productos')
+                .fields([  
+                    nga.field('image', 'template').label('Imagen')
+                        .template('<img width="70" height="70" src="http://localhost:3000/api/containers/files/download/{{entry.values.image}}"></img>'),
+                    nga.field('name', 'string').label('Nombre').isDetailLink(true),
+                    nga.field('categoryId', 'reference').label('Categoria')
+                        .targetEntity(Category)
+                        .targetField(nga.field('name')),
+                    nga.field('subCategoryId', 'reference').label('SubCategoria')
+                        .targetEntity(SubCategory)
+                        .targetField(nga.field('name')),
+                    nga.field("destacado", "boolean").label("Es destacado?")  
+                ])
+
+            Product.creationView().title('Crear producto')
+                .fields([
+                    nga.field('name', 'string').label('Nombre'),
+                    nga.field('image', 'template').label('Imagen')
+                        .template('<upload-image></upload-image>'),
+                    nga.field('description', 'text').label('Descripción (Si es elaborado)'),    
+                    nga.field('categoryId', 'reference').label('Categoria')
+                        .targetEntity(Category)
+                        .targetField(nga.field('name')),
+                    nga.field('subCategoryId', 'reference').label('SubCategoria')
+                        .targetEntity(SubCategory)
+                        .targetField(nga.field('name')),
+                    nga.field("destacado", "boolean").label("Es destacado?")
+                        .choices([
+                                { value: false, label: 'No' },
+                                { value: true, label: 'Sí' }                                                                    
+                            ])
+                        .defaultValue(false),
+                    nga.field('price', 'string').label('Precio'),
+                    nga.field('codigo', 'string').label('Código de referencia')       
+                ]);
+
+            Product.editionView().title('Editar producto {{entry.values.name}}')
+                .fields([
+                    nga.field('name', 'string').label('Nombre'),
+                    nga.field('image', 'template').label('Imagen')
+                        .template('<upload-image></upload-image>'),
+                    nga.field('description', 'text').label('Descripción (Si es elaborado)'),    
+                    nga.field('categoryId', 'reference').label('Categoria')
+                        .targetEntity(Category)
+                        .targetField(nga.field('name')),
+                    nga.field('subCategoryId', 'reference').label('SubCategoria')
+                        .targetEntity(SubCategory)
+                        .targetField(nga.field('name')),
+                    nga.field("destacado", "boolean").label("Es destacado?")
+                        .choices([
+                                { value: false, label: 'No' },
+                                { value: true, label: 'Sí' }                                                                    
+                            ])
+                        .defaultValue(false),
+                    nga.field('price', 'string').label('Precio'),
+                    nga.field('codigo', 'string').label('Código de referencia')          
+                ]); 
+
+            User.creationView().title('Crear usuario')
+                .fields([
+                    nga.field('username', 'string'),
+                    nga.field('password', 'password'),
+                    nga.field('nombre_completo', 'string'),
+                    nga.field('admin', 'boolean')
+                    .choices([
+                                { value: false, label: 'No' },
+                                { value: true, label: 'Sí' }                                                                    
+                            ])
+                        .defaultValue(false),
+                    nga.field('email', 'email')
+                ])
+
+            User.listView().title('Lista de usuarios del sistema')
+                .fields([
+                    nga.field('username', 'string').isDetailLink(true),
+                    nga.field('nombre_completo', 'string'),
+                    nga.field('admin', 'boolean'),
+                    nga.field('email', 'email')
+                ])    
+
+            Category.listView().title('Lista de categorias')
+                .fields([
+                    nga.field('name', 'string').label('Nombre').isDetailLink(true)
+                ])
+
+            Category.creationView().title('Crear categoria')
+                .fields([
+                    nga.field('name', 'string').label('Nombre')
+                ])    
+
+            SubCategory.listView().title('Lista de sub categorías')
+                .fields([
+                    nga.field('name', 'string').label('Nombre').isDetailLink(true)
+                ])
+
+            SubCategory.editionView().title('Editar subcategoría {{entry.values.name}}')
+                .fields([
+                    nga.field('name', 'string').label('Nombre')
+                ])    
+
+            SubCategory.creationView().title('Crear subcategoría')
+                .fields([
+                    nga.field('name', 'string').label('Nombre')
+                ])    
+
+            Category.editionView().title('Editar Categoría {{entry.values.name}}')
+                .fields([
+                    nga.field('name', 'string').label('Nombre')
+                ])     
+
+            Event.listView().title('Lista de eventos/noticias')
+                .fields([
+                    nga.field('image', 'template')
+                        .template('<img width="70" height="70" src="http://localhost:3000/api/containers/files/download/{{entry.values.image}}"></img>'),
+                    nga.field('title', 'string').label('Título').isDetailLink(true),
+                    nga.field('description', 'text').label('Descripción'),
+                    nga.field('body', 'text').label('Cuerpo'),
+                    nga.field('date', 'date').label('Fecha'),
+                    nga.field('important', 'boolean').label('Destacada')
+                ])
+
+            Event.creationView().title('Editar evento {{entry.values.title}}')
+                .fields([                    
+                    nga.field('title', 'string').label('Título'),
+                    nga.field('description', 'text').label('Descripción'),
+                    nga.field('body', 'text').label('Cuerpo'),
+                    nga.field('image', 'template').label('Imagen')
+                        .template('<upload-image></upload-image>'),
+                    nga.field('date', 'date').label('Fecha'),
+                    nga.field('important', 'boolean').label('Destacada')
+                    .choices([
+                                { value: false, label: 'No' },
+                                { value: true, label: 'Sí' }                                                                    
+                            ])
+                        .defaultValue(false),
+                ])    
+
+            Recipe.listView().title('Lista de recetas')
+                .fields([
+                    nga.field('title', 'string').label('Título').isDetailLink(true),
+                    nga.field('image', 'template')
+                        .template('<img width="70" height="70" src="http://localhost:3000/api/containers/files/download/{{entry.values.image}}"></img>'),
+
+                ])
+
+            Recipe.creationView().title('Crear receta')
+                .fields([
+                    nga.field('title', 'string').label('Título'),
+                    nga.field('image', 'template').label('Imagen')
+                        .template('<upload-image></upload-image>'),
+                ])
+
+            Recipe.editionView().title('Editar receta {{entry.values.title}}')
+                .fields([
+                    nga.field('title', 'string').label('Título'),
+                    nga.field('image', 'template').label('Imagen')
+                        .template('<upload-image></upload-image>'),
+                ])         
+
+            Task.listView().title('Lista de tareas')
+                .fields([
+                    nga.field('name', 'string').label('Nombre').isDetailLink(true),
+                    nga.field('description', 'text').label('Descripcion'),
+                    nga.field('priority', 'number').label('Prioridad'),
+                    nga.field('fecha_inicio', 'date').label('Fecha de inicio'),
+                    nga.field('fecha_fin', 'date').label('Fecha de finalización'),
+                    nga.field('usuariosx', 'reference_many').label('Usuarios asigandos') // Define a 1-N relationship with the comment entity
+                        .targetEntity(User) 
+                        .targetField(nga.field('username')) 
+                ])
+
+            Task.creationView().title('Crear tarea')
+                .fields([
+                    nga.field('name', 'string').label('Nombre'),
+                    nga.field('description', 'text').label('Descripcion'),
+                    nga.field('priority', 'number').label('Prioridad'),
+                    nga.field('fecha_inicio', 'date').label('Fecha de inicio'),
+                    nga.field('fecha_fin', 'date').label('Fecha de finalización'),
+                    nga.field('usuariosx', 'reference_many').label('Asignar usuarios') // Define a 1-N relationship with the comment entity
+                        .targetEntity(User) 
+                        .targetField(nga.field('username')) 
+                ])
+
+            Task.editionView().title('Editar tarea {{entry.values.name}}')
+                .fields([
+                    nga.field('name', 'string').label('Nombre'),
+                    nga.field('description', 'text').label('Descripcion'),
+                    nga.field('priority', 'number').label('Prioridad'),
+                    nga.field('fecha_inicio', 'date').label('Fecha de inicio'),
+                    nga.field('fecha_fin', 'date').label('Fecha de finalización'),
+                    nga.field('usuariosx', 'reference_many').label('Asignar usuarios') // Define a 1-N relationship with the comment entity
+                        .targetEntity(User) 
+                        .targetField(nga.field('username')) 
+                ])                              
+        
+            admin.addEntity(Product);
+            admin.addEntity(User);
+            admin.addEntity(Category);
+            admin.addEntity(SubCategory);
+            admin.addEntity(Event);
+            admin.addEntity(Recipe);
+            admin.addEntity(Task);
+
+            if (superuser) {
+                admin.menu(nga.menu()
+                .addChild(nga.menu().title('Productos').link('/products/list'))
+                .addChild(nga.menu().title('Recetas').link('/recipes/list'))
+                .addChild(nga.menu().title('Eventos').link('/events/list'))
+                .addChild(nga.menu().title('Categorias').link('/categories/list'))
+                .addChild(nga.menu().title('Subcategorias').link('/subcategories/list'))
+                .addChild(nga.menu().title('Usuarios').link('/usuarios/list'))
+                .addChild(nga.menu().title('Tareas').link('/tasks/list'))
+                );
+            } else {
+                admin.menu(nga.menu()
+                .addChild(nga.menu().title('Productos').link('/products/list'))
+                .addChild(nga.menu().title('Recetas').link('/recipes/list'))
+                .addChild(nga.menu().title('Eventos').link('/events/list'))
+                .addChild(nga.menu().title('Categorias').link('/categories/list'))
+                .addChild(nga.menu().title('Subcategorias').link('/subcategories/list'))
+                .addChild(nga.menu().title('Tareas').link('/tasks/list'))
+                );
+            }
+
+            admin.header('<header></header>')
+
+            admin.dashboard(nga.dashboard()
+                .template('<h1 style="text-align: center; padding: 20px;"></h1>')
+            );
+            
+            nga.configure(admin);
+        }]);
+
+        myApp.run(function($rootScope) {
+            $rootScope.user = JSON.parse(localStorage.getItem('$p-user'));
+        });
+
+        myApp.directive('uploadImage', function() {
+            return {
+                restrict: 'EA',
+                scope: {
+                    multiple: "@",
+                    number: "@",
+                    contacto: "@"
+                },
+                template: '<input type="file" ng-model="files" multiple ngf-select="checkFile($file)" ngf-multiple="true"></input><div style="background: lightblue; padding: 5px;  width: 50px; display: inline-block; margin: 5px;" ng-click="upload()">Subir</div><img style="margin-top: 5px;" src="{{imgUrl || img}}" height="150" width="150"></img>',
+                controller: function($scope) {
+
+                    console.log(1, $scope, $scope.$parent.entry.values);
+
+                    var url = API_URL + 'containers/files/upload';
+
+                    $scope.img = API_URL + 'containers/files/download/' + $scope.$parent.entry.values['image'];                   
+
+                    $scope.checkFile = function($file) {
+                        console.log($file, $scope.files);
+                    };
+
+                    $scope.upload = uploadImg;
+
+                    function uploadImg() {
+                        var formData = new FormData();
+
+                        for (var i = 0; i < $scope.files.length; i++) {
+                            formData.append('file', $scope.files[i]);
+                        }
+
+                        console.log($scope.files, formData);
+
+                        // Para upload es necesario usar jquery ajax con FormData object
+                        if (!$scope.multiple) {
+                            $.ajax({
+                                url: url,
+                                type: 'POST',
+                                data: formData,
+                                processData: false,
+                                contentType: false,
+                                success: function (res, success) {
+                                    console.log('Image uploaded', res, success);
+                                    $scope.$apply(function() {                                        
+                                        $scope.$parent.entry.values['image'] = res.result.files.file[0].name;                                       
+                                        $scope.imgUrl = API_URL + 'containers/files/download/' + res.result.files.file[0].name;
+                                    });
+                                }
+                            });
+                        } else {
+                            $.ajax({
+                                url: url,
+                                type: 'POST',
+                                data: formData,
+                                processData: false,
+                                contentType: false,
+                                success: function (res, success) {
+                                    console.log('Image uploaded', res, success, res.result.files.file);
+                                    $scope.$apply(function() {
+                                        $scope.$parent.entry.values['fotos'] = [];
+                                        console.log(res.result.files.file);
+
+                                        angular.forEach(res.result.files.file, function(file) {
+                                            $scope.$parent.entry.values['fotos'].push(file.name);
+                                        })
+
+                                        console.log($scope.$parent.entry.values['fotos']);
+                                    });
+                                }                                
+                            });
+                        }
+                    }
+                }
+            };
+        });
+
+        myApp.directive('header', function() {
+            return {
+                restrict: 'E',
+                templateUrl: 'header.html',
+                controller: function($scope) {
+
+                }
+            }
+        });
+
+        myApp.config(['$httpProvider', 'RestangularProvider', function ($httpProvider, RestangularProvider) {
+
+
+            // use the custom query parameters function to format the API request correctly
+            RestangularProvider.addFullRequestInterceptor(function(element, operation, what, url, headers, params) {
+
+            // params = {
+            //         access_token: user_token
+            //     };
+
+            console.log(what, element, operation, params)
+
+            // if (what == 'tasks' && operation == "getList") {
+            //     console.log('Listing')
+            //     params = {}
+
+            //     params.filter = {
+            //         include: 'usuarios'
+            //     }
+            // }
+
+            console.log('params', params);
+
+            return { params: params, headers: headers };
+
+            });
+
+        }]);
+    </script>
+
+
+  </body>
+</html>

@@ -1,0 +1,53 @@
+{
+  "ids": {
+    "User": 1,
+    "AccessToken": 5,
+    "ACL": 1,
+    "RoleMapping": 1,
+    "Role": 1,
+    "Category": 2,
+    "SubCategory": 2,
+    "Product": 4,
+    "Event": 2,
+    "Recipes": 2,
+    "Task": 2,
+    "Usuario": 4
+  },
+  "models": {
+    "User": {},
+    "AccessToken": {
+      "ufBVe2yMM5mCk2V3JMqIP9ayckulNlNJFHP5PN8IyGARIZ4vg2IBFNhQJ11KK7HY": "{\"id\":\"ufBVe2yMM5mCk2V3JMqIP9ayckulNlNJFHP5PN8IyGARIZ4vg2IBFNhQJ11KK7HY\",\"ttl\":1209600,\"created\":\"2016-12-26T20:15:45.610Z\",\"userId\":1}",
+      "OuMTNjXvZxlVudDyrfYYf2Rjh9m4nvJJEY4RFjHcttRQVzzoV3XFRWBmjx5B8u5F": "{\"id\":\"OuMTNjXvZxlVudDyrfYYf2Rjh9m4nvJJEY4RFjHcttRQVzzoV3XFRWBmjx5B8u5F\",\"ttl\":1209600,\"created\":\"2016-12-26T20:16:31.477Z\",\"userId\":1}",
+      "WEj0mkMZQ3dPIQhP8IwryAdEviMqNdyHJY6FFFcZNmwn9cCVfCJ6WwtMKjch5h4n": "{\"id\":\"WEj0mkMZQ3dPIQhP8IwryAdEviMqNdyHJY6FFFcZNmwn9cCVfCJ6WwtMKjch5h4n\",\"ttl\":1209600,\"created\":\"2016-12-26T20:37:42.753Z\",\"userId\":2}",
+      "pWkl65AWhU80IHN0LQyiHa37pi6yrLXlwlGklrXOsJgGsPy9zh3Ft8zjRB0VyUrV": "{\"id\":\"pWkl65AWhU80IHN0LQyiHa37pi6yrLXlwlGklrXOsJgGsPy9zh3Ft8zjRB0VyUrV\",\"ttl\":1209600,\"created\":\"2016-12-26T20:39:29.252Z\",\"userId\":2}"
+    },
+    "ACL": {},
+    "RoleMapping": {},
+    "Role": {},
+    "Category": {
+      "1": "{\"name\":\"Mar\",\"id\":1}"
+    },
+    "SubCategory": {
+      "1": "{\"name\":\"Filete (Mar)\",\"id\":1}"
+    },
+    "Product": {
+      "1": "{\"name\":\"Langostinos\",\"image\":\"fotoMarco.jpg\",\"id\":1}",
+      "2": "{\"name\":\"Pescado\",\"image\":\"rio.jpg\",\"categoryId\":1,\"id\":2}",
+      "3": "{\"name\":\"Lango\",\"image\":\"fotoProd.jpg\",\"categoryId\":1,\"subCategoryId\":1,\"id\":3}"
+    },
+    "Event": {
+      "1": "{\"description\":\"asasbeas\",\"image\":\"notidestaca.jpg\",\"date\":\"2016-12-26T00:00:00.000Z\",\"title\":\"Evento del orto\",\"body\":\"asdkañsdksalsdadadada\",\"important\":true,\"id\":1}"
+    },
+    "Recipes": {
+      "1": "{\"title\":\"Pan al asado\",\"image\":\"slide1_1.jpg\",\"id\":1}"
+    },
+    "Task": {
+      "1": "{\"name\":\"Ir de compras\",\"description\":\"Hay que ir de compras\",\"priority\":\"1\",\"id\":1}"
+    },
+    "Usuario": {
+      "1": "{\"username\":\"pacox\",\"password\":\"$2a$10$VX30pIKc4L7jXBWDfpA2iusnKGGg...5D.5Ad3OWKeZfL7foOTmGK\",\"email\":\"paco@pacxo.com\",\"id\":1}",
+      "2": "{\"username\":\"admin\",\"password\":\"$2a$10$rk4lbFxMlnmbWbgcGNoKBe8eQur3XKpdonWD4ibRe2wzq3sWsw7ne\",\"email\":\"paco@pacxox.com\",\"admin\":\"true\",\"id\":2}",
+      "3": "{\"nombre_completo\":\"Ramiro Trovant\",\"username\":\"ramiro1199\",\"password\":\"$2a$10$IdLu51b.IDdDn4ZS/iKwPeeeVeI7lW0zEst1ZKhKnOJNBtcM/bshq\",\"email\":\"voidhmaster@gmail.com\",\"admin\":false,\"id\":3}"
+    }
+  }
+}

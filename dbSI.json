@@ -1,0 +1,37 @@
+{
+  "ids": {
+    "User": 1,
+    "AccessToken": 4,
+    "ACL": 1,
+    "RoleMapping": 1,
+    "Role": 1,
+    "Category": 1,
+    "SubCategory": 1,
+    "Product": 1,
+    "Event": 1,
+    "Recipes": 1,
+    "Task": 1,
+    "Usuario": 3
+  },
+  "models": {
+    "User": {},
+    "AccessToken": {
+      "b5rhk9SUJYihc1VnXWw7riOuExoCmReityGHThneAeol7FERmOin9EuP4oLXUyvD": "{\"id\":\"b5rhk9SUJYihc1VnXWw7riOuExoCmReityGHThneAeol7FERmOin9EuP4oLXUyvD\",\"ttl\":1209600,\"created\":\"2016-12-26T20:12:38.168Z\",\"userId\":1}",
+      "sMOdFlzH8wgDZBarqwCBop85vL3kVQNFv4Th8CgZ3X5sUwlxuEY59rzTb7eKdoAW": "{\"id\":\"sMOdFlzH8wgDZBarqwCBop85vL3kVQNFv4Th8CgZ3X5sUwlxuEY59rzTb7eKdoAW\",\"ttl\":1209600,\"created\":\"2016-12-26T20:13:25.060Z\",\"userId\":2}",
+      "iGuAcuHv5t0DiSGEDtmH2feKdJQUD2OnXBOEprh3BvgnGVbQPUwzl3ay6mra5WLP": "{\"id\":\"iGuAcuHv5t0DiSGEDtmH2feKdJQUD2OnXBOEprh3BvgnGVbQPUwzl3ay6mra5WLP\",\"ttl\":1209600,\"created\":\"2016-12-26T20:13:54.237Z\",\"userId\":2}"
+    },
+    "ACL": {},
+    "RoleMapping": {},
+    "Role": {},
+    "Category": {},
+    "SubCategory": {},
+    "Product": {},
+    "Event": {},
+    "Recipes": {},
+    "Task": {},
+    "Usuario": {
+      "1": "{\"username\":\"paco\",\"password\":\"$2a$10$iV2/8ca0NTfCM147LOL1V.AA/zTNDEHm4XBXXsRzm5uQlXDxqfMXW\",\"email\":\"paco@paco.com\",\"id\":1}",
+      "2": "{\"username\":\"pacox\",\"password\":\"$2a$10$ztqPzduM8W5lr.bEAm0frO3pz1O6/ByrV1CgnvN.C5r/UHzNzEK5e\",\"email\":\"paco@pacxo.com\",\"id\":2}"
+    }
+  }
+}
