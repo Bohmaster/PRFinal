@@ -1,6 +1,6 @@
 'use strict';
 
-var API_URL = 'http://localhost:3000/api/'
+var API_URL = 'http://104.131.0.206:3004/api/'
 
     var credentials = {
         username: $('#username').val(),
