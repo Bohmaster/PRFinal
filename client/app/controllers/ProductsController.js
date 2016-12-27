@@ -135,6 +135,7 @@ angular.module('the_final')
       // loaders
       function loadCategories() {
         Category.find(function(data) {
+          console.log('cat', data);
           $scope.categories = data;
         });
       }

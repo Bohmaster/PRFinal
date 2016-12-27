@@ -5,8 +5,8 @@
     "ACL": 1,
     "RoleMapping": 1,
     "Role": 1,
-    "Category": 2,
-    "SubCategory": 2,
+    "Category": 4,
+    "SubCategory": 3,
     "Product": 2,
     "Event": 1,
     "Recipes": 1,
@@ -23,10 +23,13 @@
     "RoleMapping": {},
     "Role": {},
     "Category": {
-      "1": "{\"name\":\"Mar\",\"id\":1}"
+      "1": "{\"name\":\"Mar\",\"id\":1}",
+      "2": "{\"name\":\"Rio\",\"id\":2}",
+      "3": "{\"name\":\"Elaborados\",\"id\":3}"
     },
     "SubCategory": {
-      "1": "{\"name\":\"Filete\",\"id\":1}"
+      "1": "{\"name\":\"Filete\",\"id\":1}",
+      "2": "{\"name\":\"Filete\",\"categoryId\":1,\"id\":2}"
     },
     "Product": {
       "1": "{\"name\":\"tsasdas\",\"image\":\"images (1).jpg\",\"destacado\":true,\"codigo\":null,\"price\":null,\"description\":null,\"categoryId\":1,\"subCategoryId\":1,\"id\":1}"

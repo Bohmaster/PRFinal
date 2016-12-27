@@ -24,7 +24,7 @@
     <script type="text/javascript">
         console.log(jQuery);
 
-        var API_URL = "http://104.131.0.206:3004/api/";
+        var API_URL = "http://localhost:3000/api/";
 
         var myApp = angular.module('myApp', ['ng-admin']);
 
@@ -54,7 +54,7 @@
             Product.listView().title('Lista de productos')
                 .fields([  
                     nga.field('image', 'template').label('Imagen')
-                        .template('<img width="70" height="70" src="http://104.131.0.206:3004/api/containers/files/download/{{entry.values.image}}"></img>'),
+                        .template('<img width="70" height="70" src="http://localhost:3000/api/containers/files/download/{{entry.values.image}}"></img>'),
                     nga.field('name', 'string').label('Nombre').isDetailLink(true),
                     nga.field('categoryId', 'reference').label('Categoria')
                         .targetEntity(Category)
@@ -74,9 +74,9 @@
                     nga.field('categoryId', 'reference').label('Categoria')
                         .targetEntity(Category)
                         .targetField(nga.field('name')),
-                    nga.field('subCategoryId', 'reference').label('SubCategoria')
+                    nga.field('subCategoryId', 'referenced_list').label('SubCategoria')
                         .targetEntity(SubCategory)
-                        .targetField(nga.field('name')),
+                        .targetFields(nga.field('name')),
                     nga.field("destacado", "boolean").label("Es destacado?")
                         .choices([
                                 { value: false, label: 'No' },
@@ -143,28 +143,37 @@
 
             SubCategory.listView().title('Lista de sub categorías')
                 .fields([
-                    nga.field('name', 'string').label('Nombre').isDetailLink(true)
+                    nga.field('name', 'string').label('Nombre').isDetailLink(true),
+                    nga.field('categoryId', 'reference').label('Pertenece a categoría') // Define a 1-N relationship with the comment entity
+                        .targetEntity(Category) 
+                        .targetField(nga.field('name')) 
                 ])
 
             SubCategory.editionView().title('Editar subcategoría {{entry.values.name}}')
                 .fields([
-                    nga.field('name', 'string').label('Nombre')
+                    nga.field('name', 'string').label('Nombre'),
+                    nga.field('categoryId', 'reference').label('Categoría') // Define a 1-N relationship with the comment entity
+                        .targetEntity(Category) 
+                        .targetField(nga.field('name')) 
                 ])    
 
             SubCategory.creationView().title('Crear subcategoría')
                 .fields([
-                    nga.field('name', 'string').label('Nombre')
+                    nga.field('name', 'string').label('Nombre'),
+                    nga.field('categoryId', 'reference').label('Categoría') // Define a 1-N relationship with the comment entity
+                        .targetEntity(Category) 
+                        .targetField(nga.field('name')) 
                 ])    
 
             Category.editionView().title('Editar Categoría {{entry.values.name}}')
                 .fields([
-                    nga.field('name', 'string').label('Nombre')
+                    nga.field('name', 'string').label('Nombre')                    
                 ])     
 
             Event.listView().title('Lista de eventos/noticias')
                 .fields([
                     nga.field('image', 'template')
-                        .template('<img width="70" height="70" src="http://104.131.0.206:3004/api/containers/files/download/{{entry.values.image}}"></img>'),
+                        .template('<img width="70" height="70" src="http://localhost:3000/api/containers/files/download/{{entry.values.image}}"></img>'),
                     nga.field('title', 'string').label('Título').isDetailLink(true),
                     nga.field('description', 'text').label('Descripción'),
                     nga.field('body', 'text').label('Cuerpo'),
@@ -192,7 +201,7 @@
                 .fields([
                     nga.field('title', 'string').label('Título').isDetailLink(true),
                     nga.field('image', 'template')
-                        .template('<img width="70" height="70" src="http://104.131.0.206:3004/api/containers/files/download/{{entry.values.image}}"></img>'),
+                        .template('<img width="70" height="70" src="http://localhost:3000/api/containers/files/download/{{entry.values.image}}"></img>'),
 
                 ])
 
@@ -277,8 +286,32 @@
 
             admin.header('<header></header>')
 
+            // admin.dashboard(nga.dashboard()
+            //     .template('<h1 style="text-align: center; padding: 20px;"></h1>')
+            // );
+
             admin.dashboard(nga.dashboard()
-                .template('<h1 style="text-align: center; padding: 20px;"></h1>')
+                .addCollection(nga.collection(Product).title('Productos')
+                    .fields([
+                        nga.field('name').label('Nombre')
+                    ])
+                )
+                .addCollection(nga.collection(Event).title('Eventos')
+                    .fields([
+                        nga.field('title').label('Título')
+                    ])
+                )
+                .addCollection(nga.collection(Task).title('Tareas')
+                    .fields([
+                        nga.field('name').label('Nombre')
+                    ])
+                )
+                .addCollection(nga.collection(Recipe).title('Recetas')
+                    .fields([
+                        nga.field('title').label('Título')
+                    ])
+                )
+              
             );
             
             nga.configure(admin);
