@@ -24,7 +24,7 @@
     <script type="text/javascript">
         console.log(jQuery);
 
-        var API_URL = "http://localhost:3000/api/";
+        var API_URL = "http://104.131.0.206:3004/api/";
 
         var myApp = angular.module('myApp', ['ng-admin']);
 
@@ -54,7 +54,7 @@
             Product.listView().title('Lista de productos')
                 .fields([  
                     nga.field('image', 'template').label('Imagen')
-                        .template('<img width="70" height="70" src="http://localhost:3000/api/containers/files/download/{{entry.values.image}}"></img>'),
+                        .template('<img width="70" height="70" src="http://104.131.0.206:3004/api/containers/files/download/{{entry.values.image}}"></img>'),
                     nga.field('name', 'string').label('Nombre').isDetailLink(true),
                     nga.field('categoryId', 'reference').label('Categoria')
                         .targetEntity(Category)
@@ -173,7 +173,7 @@
             Event.listView().title('Lista de eventos/noticias')
                 .fields([
                     nga.field('image', 'template')
-                        .template('<img width="70" height="70" src="http://localhost:3000/api/containers/files/download/{{entry.values.image}}"></img>'),
+                        .template('<img width="70" height="70" src="http://104.131.0.206:3004/api/containers/files/download/{{entry.values.image}}"></img>'),
                     nga.field('title', 'string').label('Título').isDetailLink(true),
                     nga.field('description', 'text').label('Descripción'),
                     nga.field('body', 'text').label('Cuerpo'),
@@ -201,7 +201,7 @@
                 .fields([
                     nga.field('title', 'string').label('Título').isDetailLink(true),
                     nga.field('image', 'template')
-                        .template('<img width="70" height="70" src="http://localhost:3000/api/containers/files/download/{{entry.values.image}}"></img>'),
+                        .template('<img width="70" height="70" src="http://104.131.0.206:3004/api/containers/files/download/{{entry.values.image}}"></img>'),
 
                 ])
 
